@@ -1,0 +1,13 @@
+name = "Terra Armory"
+filename = "terra_armory-1.20.2-0.65.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/iBSqDDaR/versions/dGyKEVzU/terra_armory-1.20.2-0.65.jar"
+hash-format = "sha512"
+hash = "37be950a9688800334ac3dc6298f4a08e0eff7233fe88f15934a8b35bc1ddf63514d52d68569f8a7243ba7e62a63205d98424a90e24e25aa538fc70f8921dfde"
+
+[update]
+[update.modrinth]
+mod-id = "iBSqDDaR"
+version = "dGyKEVzU"

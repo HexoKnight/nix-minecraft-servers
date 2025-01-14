@@ -1,0 +1,13 @@
+name = "Fabric Shield Lib"
+filename = "FabricShieldLib-1.7.2-1.20.1.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/7SDalH12/versions/xY16zX6k/FabricShieldLib-1.7.2-1.20.1.jar"
+hash-format = "sha512"
+hash = "e6045d5187f31f9937d4239415b33aadd014184ab190264347a586c98104989a7953505726bb0551c8740b3410d2f5279b8340c6ff0d52fe1b4b2ee8fc32646e"
+
+[update]
+[update.modrinth]
+mod-id = "7SDalH12"
+version = "xY16zX6k"
