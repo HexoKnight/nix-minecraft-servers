@@ -263,3 +263,7 @@ metafile = true
 [[files]]
 file = "mods/yungs-extras.pw.toml"
 metafile = true
+
+[[files]]
+file = "world/datapacks/legendary-encounters(cobblemon).pw.toml"
+metafile = true

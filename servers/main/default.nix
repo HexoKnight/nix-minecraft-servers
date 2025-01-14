@@ -15,6 +15,7 @@ in
 
   package = modpack.serverPackage;
   symlinks = {
-    mods = "${modpack}/mods";
+    "mods" = "${modpack}/mods";
+    "world/datapacks" = "${modpack}/world/datapacks";
   };
 }

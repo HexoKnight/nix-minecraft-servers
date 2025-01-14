@@ -1,0 +1,13 @@
+name = "Legendary Encounters (Cobblemon)"
+filename = "Legendary_Encounters!.zip"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/pnBtlkdI/versions/XKUiTYjA/Legendary_Encounters%21.zip"
+hash-format = "sha512"
+hash = "6414c04b56e42cb88af38706866f7ea39f55fa1f215cd8e1058eba06d3c20af2979615004b03003fe7a028356107fde9f799b23ae10d5b72bdb2b3935e237383"
+
+[update]
+[update.modrinth]
+mod-id = "pnBtlkdI"
+version = "XKUiTYjA"
