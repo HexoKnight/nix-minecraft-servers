@@ -15,6 +15,7 @@ in
 
   package = modpack.serverPackage;
   symlinks = {
+    "allowed_symlinks.txt".value = [ "/nix/store" ];
     "mods" = "${modpack}/mods";
     "world/datapacks" = "${modpack}/world/datapacks";
   };
