@@ -1,8 +1,10 @@
 { pkgs, ... }:
 
 let
-  modpack = pkgs.buildPackwizModpack {
+  parsedPackwiz = pkgs.parsePackwiz {
     packRoot = ./.;
+  };
+  builtModpack = parsedPackwiz.build {
     side = "server";
   };
 in
@@ -13,10 +15,10 @@ in
   };
   jvmOpts = "-Xmx4G -Xms500M";
 
-  package = modpack.serverPackage;
+  package = parsedPackwiz.serverPackage;
   symlinks = {
     "allowed_symlinks.txt".value = [ "/nix/store" ];
-    "mods" = "${modpack}/mods";
-    "world/datapacks" = "${modpack}/world/datapacks";
+    "mods" = "${builtModpack}/mods";
+    "world/datapacks" = "${builtModpack}/world/datapacks";
   };
 }
