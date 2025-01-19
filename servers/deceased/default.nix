@@ -19,7 +19,8 @@ let
     symlinked = [
       "kubejs"
       "libraries"
-      "mods"
+      # done separately to change mods
+      # "mods"
       "resources"
     ];
     files = [
@@ -31,6 +32,23 @@ let
       "scripts"
     ];
   };
+
+  mods =
+    let
+      newerReadyPlayerFun = pkgs.fetchurl {
+        url = "https://mediafilez.forgecdn.net/files/5863/570/ReadyPlayerFun-1.18.2-3.0.0.0.jar";
+        hash = "sha256-5PjO/3LosZMyubjiWwbV88JFPXuNp+ITnPG9mGsQuJs=";
+      };
+    in
+    pkgs.symlinkJoin {
+      name = "mods";
+      paths = [ "${serverFiles}/mods" ];
+      postBuild = ''
+        cd $out
+        rm ReadyPlayerFun-1.18.2-1.4.1.9.jar
+        ln -s ${newerReadyPlayerFun} ${newerReadyPlayerFun.name}
+      '';
+    };
 
   voicechat = {
     path = "config/voicechat/voicechat-server.properties";
@@ -67,6 +85,8 @@ in
   '';
 
   package = serverPackage;
-  symlinks = genPathAttrs paths.symlinked;
+  symlinks = genPathAttrs paths.symlinked // {
+    "mods" = mods;
+  };
   files = genPathAttrs paths.files;
 }
