@@ -31,13 +31,29 @@ let
     ];
     files = [
       # creates mods at runtime???
-      "mods"
+      # also done separately to add mods
+      # "mods"
       # this needs to be modified at runtime (and config generally need to be writable)
       "config"
       # craftteaker tries to create this dir
       "scripts"
     ];
   };
+
+  mods =
+    let
+      Server-Pauser = pkgs.fetchurl {
+        url = "https://mediafilez.forgecdn.net/files/4525/718/Server-Pauser-1.12.2-1.0.0.jar";
+        hash = "sha256-XTgUo468tGwBLrM+VZtaKHGWc6560qRRXN7HBRCwEAA=";
+      };
+    in
+    pkgs.symlinkJoin {
+      name = "mods";
+      paths = [ "${serverFiles}/mods" ];
+      postBuild = ''
+        ln -s ${Server-Pauser} $out/${Server-Pauser.name}
+      '';
+    };
 
   genPathAttrs = paths: lib.genAttrs paths (path: "${serverFiles}/${path}");
 
@@ -99,5 +115,7 @@ in
 
   package = serverPackage;
   symlinks = genPathAttrs paths.symlinked;
-  files = genPathAttrs paths.files;
+  files = genPathAttrs paths.files // {
+    "mods" = mods;
+  };
 }
