@@ -42,17 +42,38 @@ let
 
   mods =
     let
-      Server-Pauser = pkgs.fetchurl {
-        url = "https://mediafilez.forgecdn.net/files/4525/718/Server-Pauser-1.12.2-1.0.0.jar";
-        hash = "sha256-XTgUo468tGwBLrM+VZtaKHGWc6560qRRXN7HBRCwEAA=";
-      };
+      extraMods = [
+        # https://www.curseforge.com/minecraft/mc-mods/serverpauser
+        (pkgs.fetchurl {
+          url = "https://mediafilez.forgecdn.net/files/4525/718/Server-Pauser-1.12.2-1.0.0.jar";
+          hash = "sha256-XTgUo468tGwBLrM+VZtaKHGWc6560qRRXN7HBRCwEAA=";
+        })
+
+        # https://www.curseforge.com/minecraft/mc-mods/p455w0rds-library
+        (pkgs.fetchurl {
+          url = "https://mediafilez.forgecdn.net/files/2830/265/p455w0rdslib-1.12.2-2.3.161.jar";
+          hash = "sha256-5YRMBE2fLOLyPu+E2V7qjMHyxVgYdL0BQQ59EDuQpCQ=";
+        })
+        # https://www.curseforge.com/minecraft/mc-mods/ae2wtlib
+        # depends on prev
+        (pkgs.fetchurl {
+          url = "https://mediafilez.forgecdn.net/files/2830/114/AE2WTLib-1.12.2-1.0.34.jar";
+          hash = "sha256-bQ7FRb+U5hQrQUD5EKrkEUsfkimOggwS+pGvNaPJDWA=";
+        })
+        # https://www.curseforge.com/minecraft/mc-mods/wireless-crafting-terminal
+        # depends on prev 2
+        (pkgs.fetchurl {
+          url = "https://mediafilez.forgecdn.net/files/2830/252/WirelessCraftingTerminal-1.12.2-3.12.97.jar";
+          hash = "sha256-aeW4LzOSUWnjNFal9rMgKRfAb8NPHzL3HPVTsHM/ARQ=";
+        })
+      ];
     in
     pkgs.symlinkJoin {
       name = "mods";
       paths = [ "${serverFiles}/mods" ];
-      postBuild = ''
-        ln -s ${Server-Pauser} $out/${Server-Pauser.name}
-      '';
+      postBuild = lib.concatMapStrings (mod: ''
+        ln -s ${mod} $out/${mod.name}
+      '') extraMods;
     };
 
   genPathAttrs = paths: lib.genAttrs paths (path: "${serverFiles}/${path}");
