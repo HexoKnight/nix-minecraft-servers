@@ -10,14 +10,22 @@
     };
   };
 
-  outputs = { nix-packwiz, ... }:
+  outputs = { self, nix-packwiz, ... }:
   {
     nixosModules = rec {
       servers = {
         imports = [ ./servers ];
-        nixpkgs.overlays = [ nix-packwiz.overlays.default ];
+        nixpkgs.overlays = [
+          self.overlays.default
+          nix-packwiz.overlays.default
+        ];
       };
       default = servers;
+    };
+    overlays = {
+      default = final: prev: {
+        fetchForge = final.callPackage ./packages/fetchForge.nix {};
+      };
     };
   };
 }
