@@ -14,7 +14,7 @@ let
     forgeVersion = "47.3.0";
     hash = "sha256-aTp3iRuAiX19YMh2kE/QaP0udDy0lfUSI6f7YCwO5l8=";
 
-    jdk = pkgs.openjdk_headless;
+    jdk = pkgs.openjdk17_headless;
   };
 
   paths = {
