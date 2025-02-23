@@ -19,9 +19,10 @@ let
 
   paths = {
     symlinked = [
-      "kubejs"
     ];
     files = [
+      # complains about readonly filesystem otherwise
+      "kubejs"
       # done separately to add mods
       # "mods"
       # this needs to be modified at runtime (and config generally need to be writable)
