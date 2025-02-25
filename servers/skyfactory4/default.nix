@@ -76,6 +76,13 @@ let
       '') extraMods;
     };
 
+  patches = [
+    {
+      path = "config/aroma1997/aromabackup.cfg";
+      sedExpr = ''s/(S:compressionType=).*$/\1tar.gz/'';
+    }
+  ];
+
   genPathAttrs = paths: lib.genAttrs paths (path: "${serverFiles}/${path}");
 
   # essentially copies run.sh
@@ -133,6 +140,12 @@ in
     # white-list = false;
   };
   jvmOpts = "-Xmx4G -Xms500M";
+
+  extraStartPre = lib.concatMapStrings (patch: ''
+    if [ -f ${lib.escapeShellArg patch.path} ]; then
+      ${lib.getExe pkgs.gnused} -i -Ee ${lib.escapeShellArg patch.sedExpr} ${lib.escapeShellArg patch.path}
+    fi
+  '') patches;
 
   package = serverPackage;
   symlinks = genPathAttrs paths.symlinked;

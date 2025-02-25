@@ -80,7 +80,7 @@ in
 
   extraStartPre = ''
     if [ -e ${voicechat.path} ]; then
-      ${lib.getExe pkgs.gnused} -iEe 's/^port=.*$/port=${toString voicechat.port}/' ${voicechat.path}
+      ${lib.getExe pkgs.gnused} -i -Ee 's/^port=.*$/port=${toString voicechat.port}/' ${voicechat.path}
     fi
   '';
 
