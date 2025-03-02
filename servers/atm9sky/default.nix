@@ -3,16 +3,16 @@
 let
   serverFiles = pkgs.fetchzip rec {
     pname = "atm9sky";
-    version = "1.1.3";
-    url = "https://mediafilez.forgecdn.net/files/5952/312/server-${version}.zip";
-    hash = "sha256-0izpR50yafZoC5W8jvTkm8lvdVLIKoq9XzQiKeLrRFw=";
+    version = "1.1.5";
+    url = "https://mediafilez.forgecdn.net/files/6253/993/server-${version}.zip";
+    hash = "sha256-t5QvjPsLYn1EiwZCoET5/f87x7jGZjFPDHWj5Mq7XHk=";
     stripRoot = false;
   };
 
   serverPackage = pkgs.fetchForge {
     mcVersion = "1.20.1";
-    forgeVersion = "47.3.0";
-    hash = "sha256-aTp3iRuAiX19YMh2kE/QaP0udDy0lfUSI6f7YCwO5l8=";
+    forgeVersion = "47.3.33";
+    hash = "sha256-aOugxrl+mahBLQUGezL14o+pogxgx4M+FdoQH4+74K0=";
 
     jdk = pkgs.openjdk17_headless;
   };
